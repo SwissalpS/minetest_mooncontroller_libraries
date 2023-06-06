@@ -6,3 +6,5 @@ mooncontroller_libs = {
 local sMP = minetest.get_modpath('mooncontroller_libs')
 
 dofile(sMP .. '/vector.lua')
+dofile(sMP .. '/technic_materials.lua')
+
