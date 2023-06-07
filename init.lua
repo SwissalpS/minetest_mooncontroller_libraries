@@ -13,4 +13,5 @@ local doif = mooncontroller_libs.dofile_if_enabled
 doif('technic_materials')
 doif('vector')
 doif('vector_basic')
+doif('worldedit')
 
