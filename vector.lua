@@ -1,3 +1,14 @@
+local mcls = mooncontroller_libs
+
+if not mcls.is_lib_disabled('vector') then
+
+	mooncontroller.luacontroller_libraries['vector'] = vector
+
+end -- if not disabled vector
+
+
+if not mcls.is_lib_disabled('vector_basic') then
+
 local tV = {}
 tV.new = function(x, y, z, r)
 	return { x = x or 0, y = y or 0, z = z or 0, r = r }
@@ -9,5 +20,6 @@ print(type(v))
 end
 
 mooncontroller.luacontroller_libraries['vector_basic'] = tV
-mooncontroller.luacontroller_libraries['vector'] = vector
+
+end -- if not disabled vector_basic
 
