@@ -69,7 +69,7 @@ tV.subtract = vector.subtract
 
 -- returns a string of vector
 -- vector, optional separator string
-tV.tostring(v, s)
+tV.tostring = function(v, s)
 
 	if (not v) or (not 'table' == type(v))
 		or (not v.x) or (not v.y) or (not v.z)
@@ -88,6 +88,4 @@ end -- tostring
 mooncontroller.luacontroller_libraries['vector_basic'] = tV
 
 end -- if not disabled vector_basic
-
--- really? luacheck does not allow trailing comments?
 
