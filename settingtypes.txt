@@ -1,0 +1,3 @@
+# comma separated list of libs that are not made available on this server
+mooncontroller_libs.disabled_libs (list of disabled libs) string worldedit
+
