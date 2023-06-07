@@ -35,7 +35,7 @@ tV.intersect = function(tPa, iRa, tPb, iRb)
 	local tA1 = vector.subtract(tPa, iRa)
 	local tA2 = vector.add(tPa, iRa)
 	local tB1 = vector.subtract(tPb, iRb)
-	local tB2 = vector.add(tPb, tBR)
+	local tB2 = vector.add(tPb, iRb)
 
 	local bX = (tB1.x <= tA2.x and tB1.x >= tA1.x)
 		or (tB2.x <= tA2.x and tB2.x >= tA1.x)
