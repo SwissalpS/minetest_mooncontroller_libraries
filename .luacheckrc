@@ -1,6 +1,7 @@
 
 globals = {
-	"mooncontroller_libs",
+	 "mooncontroller",
+	 "mooncontroller_libs",
 }
 
 read_globals = {
@@ -14,6 +15,6 @@ read_globals = {
 	"dump",
 
 	-- deps
-	"default", "mooncontroller"
+	"default",
 }
 

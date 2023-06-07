@@ -1,5 +1,9 @@
-mooncontroller_libs.tTM = {}
-mooncontroller_libs.tTM.grinder_inputs = {
+local mcls = mooncontroller_libs
+if not mcls.is_lib_disabled('technic_materials') then return end
+
+-- TODO: dynamically generate list, see replacer:inspect
+mcls.tTM = {}
+mcls.tTM.grinder_inputs = {
 	'basic_materials:brass_ingot',
 	'cherrytree:trunk',
 	'cherrytree:wood',
@@ -85,5 +89,5 @@ mooncontroller_libs.tTM.grinder_inputs = {
 	'technic:zinc_ingot',
 	'technic:zinc_lump',
 }
-mooncontroller.luacontroller_libraries['technic_materials'] = mooncontroller_libs.tTM
+mooncontroller.luacontroller_libraries['technic_materials'] = mcls.tTM
 
