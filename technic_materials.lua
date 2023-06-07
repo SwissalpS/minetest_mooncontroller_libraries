@@ -1,5 +1,4 @@
 local mcls = mooncontroller_libs
-if not mcls.is_lib_disabled('technic_materials') then return end
 
 -- TODO: dynamically generate list, see replacer:inspect
 mcls.tTM = {}
