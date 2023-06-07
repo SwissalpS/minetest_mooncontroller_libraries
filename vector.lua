@@ -89,3 +89,5 @@ mooncontroller.luacontroller_libraries['vector_basic'] = tV
 
 end -- if not disabled vector_basic
 
+-- really? luacheck does not allow trailing comments?
+
