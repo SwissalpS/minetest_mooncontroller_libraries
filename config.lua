@@ -8,3 +8,6 @@ for _, s in ipairs(t) do
 
 end
 
+mooncontroller_libs.has_technic = minetest.get_modpath('technic') and true
+if not mooncontroller_libs.has_technic then mooncontroller_libs.disabled_libs.technic_materials = true
+
