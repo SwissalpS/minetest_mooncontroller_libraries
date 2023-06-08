@@ -1,92 +1,56 @@
 local mcls = mooncontroller_libs
-
--- TODO: dynamically generate list, see replacer:inspect
 mcls.tTM = {}
-mcls.tTM.grinder_inputs = {
-	'basic_materials:brass_ingot',
-	'cherrytree:trunk',
-	'cherrytree:wood',
-	'default:acacia_tree',
-	'default:acacia_wood',
-	'technic:acacia_grindings',
-	'default:aspen_tree',
-	'default:aspen_wood',
-	'default:bronze_ingot',
-	'default:coal_lump',
-	'default:cobble',
-	'default:copper_ingot',
-	'default:copper_lump',
-	'default:desert_sandstone',
-	'default:desert_stone',
-	'default:gold_ingot',
-	'default:gold_lump',
-	'default:gravel',
-	'default:ice',
-	'default:steel_ingot',
-	'default:iron_lump',
-	'default:jungletree',
-	'default:junglewood',
-	'default:pine_tree',
-	'default:pine_wood',
-	'default:sand',
-	'default:sandstone',
-	'default:silver_sandstone',
-	'default:stone',
-	'default:tin_ingot',
-	'default:tin_lump',
-	'default:tree',
-	'default:wood',
-	'farming:seed_cotton',
-	'farming:seed_wheat',
-	'moreores:mithril_ingot',
-	'moreores:mithril_lump',
-	'moreores:silver_ingot',
-	'moreores:silver_lump',
-	'moretrees:apple_tree_trunk',
-	'moretrees:apple_tree_planks',
-	'moretrees:beech_trunk',
-	'moretrees:beech_planks',
-	'moretrees:birch_trunk',
-	'moretrees:birch_planks',
-	'moretrees:cedar_trunk',
-	'moretrees:cedar_planks',
-	'moretrees:date_palm_trunk',
-	'moretrees:date_palm_planks',
-	'moretrees:fir_trunk',
-	'moretrees:fir_planks',
-	'moretrees:jungletree_trunk',
-	'moretrees:oak_trunk',
-	'moretrees:oak_planks',
-	'moretrees:palm_trunk',
-	'moretrees:palm_planks',
-	'moretrees:poplar_trunk',
-	'moretrees:poplar_planks',
-	'moretrees:rubber_tree_trunk',
-	'moretrees:rubber_tree_trunk_empty',
-	'moretrees:rubber_tree_planks',
-	'technic:rubber_tree_grindings',
-	'moretrees:sequoia_trunk',
-	'moretrees:sequoia_planks',
-	'moretrees:spruce_trunk',
-	'moretrees:spruce_planks',
-	'moretrees:willow_trunk',
-	'moretrees:willow_planks',
-	'redwood:redwood_trunk',
-	'redwood:redwood_wood',
-	'technic:carbon_steel_ingot',
-	'technic:cast_iron_ingot',
-	'technic:chernobylite_block',
-	'technic:chromium_ingot',
-	'technic:chromium_lump',
-	'technic:common_tree_grindings',
-	'technic:lead_ingot',
-	'technic:lead_lump',
-	'technic:stainless_steel_ingot',
-	'technic:sulfur_lump',
-	'technic:uranium_ingot',
-	'technic:uranium_lump',
-	'technic:zinc_ingot',
-	'technic:zinc_lump',
-}
+mcls.tTM.alloy_inputs = {}
+mcls.tTM.centrifuge_inputs = {}
+mcls.tTM.compressor_inputs = {}
+mcls.tTM.extractor_inputs = {}
+mcls.tTM.freezer_inputs = {}
+mcls.tTM.furnace_inputs = {}
+mcls.tTM.grinder_inputs = {}
+-- in case a mooncontroller calls the lib early, we don't want to
+-- cause 'indexing nil object' errors.
 mooncontroller.luacontroller_libraries['technic_materials'] = mcls.tTM
+
+local function get_cooking_inputs()
+
+	-- getting cooking recipes is a bit of work:
+	local l, i = {}, 0
+	-- first loop through all craftitems
+	for s, _ in pairs(minetest.registered_craftitems) do
+		-- with each check for recipes and loop those
+		for _, t in ipairs(minetest.get_all_craft_recipes(s) or {}) do
+			-- to find if type/method is cooking
+			if 'cooking' == t.type then
+				-- then we can add the input to our list
+				i = i + 1
+				l[i] = t.items[1]
+			end
+		end
+	end
+	-- sort the list
+	table.sort(l)
+
+	return l
+
+end -- get_cooking_inputs
+
+
+local function scan()
+-- TODO: check for existance of recipes-field(s)
+
+	mcls.tTM.alloy_inputs = mcls.table_keys(technic.recipes.alloy.recipes)
+	mcls.tTM.centrifuge_inputs = mcls.table_keys(technic.recipes.separating.recipes)
+	mcls.tTM.compressor_inputs = mcls.table_keys(technic.recipes.compressing.recipes)
+	mcls.tTM.extractor_inputs = mcls.table_keys(technic.recipes.extracting.recipes)
+	mcls.tTM.freezer_inputs = mcls.table_keys(technic.recipes.freezing.recipes)
+	mcls.tTM.furnace_inputs = get_cooking_inputs()
+	mcls.tTM.grinder_inputs = mcls.table_keys(technic.recipes.grinding.recipes)
+
+	-- register a copy of new cache
+	mooncontroller.luacontroller_libraries['technic_materials'] = mcls.tTM
+
+end -- scan
+minetest.register_on_mods_loaded(function()
+	minetest.after(1, scan)
+end)
 
