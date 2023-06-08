@@ -1,3 +1,8 @@
+-- nothing for live servers, just playing around with the limits
+-- of libraries with this module.
+-- No protection checks and no inventory usage and probably going
+-- to time-out before anything useful is built.
+
 local function build_cube(tW)
 
 	if not tW.pos or not tW.radius then return nil end
@@ -54,8 +59,10 @@ local function build(tW)
 
 	if 'sphere' == tW.name then
 		return build_sphere(tW)
+
 	elseif 'cube' == tW.name then
 		return build_cube(tW)
+
 	end
 
 end -- build
@@ -88,8 +95,10 @@ local function luaC_worldedit(tW)
 
 	if 'function' == tW.command then
 		return give_function(tW)
+
 	elseif 'build' == tW.command then
 		return build(tW)
+
 	end
 
 	return nil
