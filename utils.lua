@@ -14,3 +14,17 @@ mooncontroller_libs.dofile_if_enabled = function(s)
 
 end -- dofile_if_enabled
 
+
+mooncontroller_libs.table_keys = function(t)
+
+	local i, l = 0, {}
+	for k, _ in pairs(t) do
+		i = i + 1
+		l[i] = k
+	end
+
+	table.sort(l)
+	return l
+
+end -- table_keys
+
