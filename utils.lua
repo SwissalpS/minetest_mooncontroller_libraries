@@ -10,7 +10,7 @@ mooncontroller_libs.dofile_if_enabled = function(s)
 
 	if mooncontroller_libs.disabled_libs[s] then return end
 
-	return dofile(sMP .. '/' .. s .. '.lua')
+	return dofile(sMP .. '/modules/' .. s .. '.lua')
 
 end -- dofile_if_enabled
 
