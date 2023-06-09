@@ -9,7 +9,7 @@ end -- contains
 
 -- make a number nice and pretty
 -- truncate number n to i decimals and apply prettyness with locale s
--- (defaults to swiss locale)
+-- (defaults to Swiss locale)
 tS.pretty_num = function(n, i, s)
 
 	if 'number' ~= type(n) then return nil end
