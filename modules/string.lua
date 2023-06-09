@@ -1,10 +1,56 @@
 local tS = {}
 -- TODO: throw errors instead of returning nil?
 
+tS.begins_with = function(sHaystack, sNeedle)
+	if '' == sNeedle then return nil end
+	return string.sub(sHaystack, 1, string.len(sNeedle)) == sNeedle
+end -- begins_with
+
+
 -- simple find if string contains other string
 tS.contains = function(sHaystack, sNeedle)
+	if '' == sNeedle then return nil end
 	return string.find(sHaystack, sNeedle, 0, true) ~= nil
 end -- contains
+
+
+-- truncate string s to length i and add ellipsis if needed
+-- at beginning: b == true (or anything but false and nil)
+-- in the middle: b == false
+-- at end: b == nil
+tS.ellipsis = function(s, i, b)
+
+	-- invalid or too short -> nothing to do
+	if 'string' ~= type(s) or string.len(s) <= i then return s end
+	if 'number' ~= type(i) then return nil end
+
+	-- we don't want any negativity nor fractions
+	i = math.abs(math.floor(i))
+	-- silly
+	if 0 == i then return '' end
+
+	-- ridiculous
+	if 2 >= i then return string.sub(s, 1, i) end
+
+	if nil == b then
+		-- add to end
+		return string.sub(s, 1, i - 1) .. '…'
+	elseif b then
+		-- add to beginning
+		return '…' .. string.sub(s, -1 * (i - 1))
+	else
+		-- insert in middle
+		local j = math.floor((i - 1) * .5)
+		return string.sub(s, 1, j) .. '…' .. string.sub(s, -j)
+	end
+
+end -- ellipsis
+
+
+tS.ends_with = function(sHaystack, sNeedle)
+	if '' == sNeedle then return nil end
+	return string.sub(sHaystack, -string.len(sNeedle)) == sNeedle
+end -- ends_with
 
 
 -- make a number nice and pretty
@@ -81,5 +127,19 @@ tS.split = function(s, sep, b)
 end -- split
 
 
+-- currently unsure which method to use so I'm providing both
 mooncontroller.luacontroller_libraries['string'] = tS
+mooncontroller.luacontroller_libraries['string_env'] = function(env)
+
+	env.string.begins_with = tS.begins_with
+	env.string.contains = tS.contains
+	env.string.ellipsis = tS.ellipsis
+	env.string.ends_with = tS.ends_with
+	env.string.pretty_num = tS.pretty_num
+	env.string.split = tS.split
+
+	-- probably not a good idea
+	return tS
+
+end
 
