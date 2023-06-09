@@ -12,6 +12,7 @@ tT.apply = function(t, f)
 		t[k] = f(v)
 	end
 
+	-- no need to return it, but gives user the flexibility
 	return t
 
 end -- apply
@@ -57,5 +58,16 @@ end -- list_contains
 tT.keys = mooncontroller_libs.table_keys
 
 
+-- currently unsure which method to use so I'm providing both
 mooncontroller.luacontroller_libraries['table'] = tT
+mooncontroller.luacontroller_libraries['table_env'] = function(env)
+
+	env.table.apply = tT.apply
+	env.table.contains = tT.contains
+	env.table.list_contains = tT.list_contains
+	env.table.keys = mooncontroller_libs.table_keys
+
+	return true
+
+end
 
