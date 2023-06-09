@@ -1,4 +1,4 @@
-mooncontroller.luacontroller_libraries['log'] = function(env, pos)
+mooncontroller.luacontroller_libraries['log'] = function(env) --, pos)
 
 	local mem = env.mem
 

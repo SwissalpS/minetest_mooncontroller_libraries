@@ -6,15 +6,16 @@ globals = {
 
 read_globals = {
 	-- Stdlib
-	string = {fields = {"split"}},
-	table = {fields = {"copy", "getn"}},
+	"string",
+	"table",
 
 	-- Minetest
 	"minetest",
-	"vector", "ItemStack",
+	"vector",
 	"dump",
 
 	-- deps
 	"default",
+	"technic",
 }
 

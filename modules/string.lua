@@ -10,6 +10,7 @@ end -- contains
 -- make a number nice and pretty
 -- truncate number n to i decimals and apply prettyness with locale s
 -- (defaults to Swiss locale)
+--[[
 tS.pretty_num = function(n, i, s)
 
 	if 'number' ~= type(n) then return nil end
@@ -45,7 +46,7 @@ tS.pretty_num = function(n, i, s)
 	return sOut
 
 end -- pretty_num
-
+--]]
 
 -- split string s by separator sep and return a table with the parts
 -- set third parameter to true to include empty parts
