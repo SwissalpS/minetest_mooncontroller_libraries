@@ -48,7 +48,9 @@ local function build_cube(tW)
 end -- build_cube
 
 
-local function build_sphere(tW)
+local function build_sphere() --tW)
+
+	-- TODO
 
 end -- build_sphere
 
@@ -91,7 +93,7 @@ end -- give_function
 
 local function luaC_worldedit(tW)
 
-	if not 'table' == type(tW) then return nil end
+	if 'table' ~= type(tW) then return nil end
 
 	if 'function' == tW.command then
 		return give_function(tW)
@@ -106,7 +108,7 @@ local function luaC_worldedit(tW)
 end -- worldedit
 
 
-mooncontroller.luacontroller_libraries['worldedit'] = function(env, pos)
+mooncontroller.luacontroller_libraries['worldedit'] = function()--env, pos)
 
 	return luaC_worldedit
 
