@@ -9,6 +9,8 @@ Libraries that can be loaded from the in-game [mooncontroller](https://github.co
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+Ideas for naming and functions to add are welcome. Open an issue or submit a PR, thanks.
+
 As always, no warranty is given that anything actually works and
 does not damage your system!
 
