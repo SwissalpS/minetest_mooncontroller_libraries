@@ -15,6 +15,26 @@ mooncontroller_libs.dofile_if_enabled = function(s)
 end -- dofile_if_enabled
 
 
+-- replace first occurence of sNeedle in sHaystack with sRep
+mooncontroller_libs.string_replace = function(sHaystack, sNeedle, sRep)
+
+	if 'string' ~= type(sHaystack) then return nil end
+	if '' == sHaystack then return '' end
+	if '' == sNeedle or 'string' ~= type(sNeedle) then
+		return sHaystack
+	end
+
+	sRep = tostring(sRep) or ''
+
+	local i = string.find(sHaystack, sNeedle, 0, true)
+	if not i then return sHaystack end
+
+	return string.sub(sHaystack, 1, i - 1) .. sRep ..
+		string.sub(sHaystack, i + string.len(sNeedle))
+
+end -- string_replace
+
+
 mooncontroller_libs.table_keys = function(t)
 
 	local i, l = 0, {}
