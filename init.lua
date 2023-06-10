@@ -11,6 +11,7 @@ dofile(sMP .. '/config.lua')
 dofile(sMP .. '/utils.lua')
 local doif = mooncontroller_libs.dofile_if_enabled
 doif('date_time')
+doif('dump2')
 doif('log')
 doif('string')
 doif('table')
