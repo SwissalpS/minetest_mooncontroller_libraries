@@ -1,6 +1,6 @@
 -- parse disabled libs
 local t = string.split(minetest.settings:get(
-		'mooncontroller_libs.disabled_libs') or 'worldedit', ',')
+		'mooncontroller_libs.disabled_libs') or 'worldedit,worldedit_env', ',')
 
 for _, s in ipairs(t) do
 

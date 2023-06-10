@@ -108,11 +108,20 @@ local function luaC_worldedit(tW)
 end -- worldedit
 
 
-mooncontroller.luacontroller_libraries['worldedit'] = function()--env, pos)
+mooncontroller.luacontroller_libraries['worldedit'] = function()
 
 	return luaC_worldedit
 
 
 
 end -- add library
+
+
+mooncontroller.luacontroller_libraries['worldedit_env'] = function(env)
+
+	env.worldedit = luaC_worldedit
+
+	return luaC_worldedit
+
+end
 
