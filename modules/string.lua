@@ -55,8 +55,9 @@ end -- ends_with
 
 -- make a number nice and pretty
 -- truncate number n to i decimals and apply prettyness with locale s
--- (defaults to Swiss locale)
---[[
+-- (defaults to Swiss locale when s == nil)
+-- s can be one of: DE, EN, ES, ES_weird, FR, JA, PL, PT, PT_BR, SV
+-- or s can be a list { <comma>, <thousands separator> }
 tS.pretty_num = function(n, i, s)
 
 	if 'number' ~= type(n) then return nil end
@@ -70,7 +71,7 @@ tS.pretty_num = function(n, i, s)
 	local sComma, sSep = '.', "'"
 	-- allow arbitrary comma and thousand separator
 	if 'table' == type(s) then
-		sComma, sSep = s[1] or '.', s[2] or "'"
+		sComma, sSep = s[1] or sComma, s[2] or sSep
 	-- add some common and weird styles
 	elseif 'ES_weird' == s then
 		sComma, sSep = "'", '.'
@@ -84,15 +85,31 @@ tS.pretty_num = function(n, i, s)
 		sComma, sSep = ':', ' '
 	end
 
-	local sOut = ''
-	local tParts tS.split(tostring(n), '.')
-
- -- TODO:
-
-	return sOut
+	-- split first at 'e+' for huge number support
+	local tParts1 = tS.split(tostring(n), 'e')
+	-- leave trailing e+/- if exists
+	local sOut = tParts1[2] and 'e' .. tParts1[2] or ''
+	-- split by decimal point (TODO: this may depend on server locale)
+	local tParts2 = tS.split(tParts1[1], '.')
+	-- truncate decimal places (without rounding) and add comma
+	if 0 ~= i and tParts2[2] then
+		sOut = sComma .. string.sub(tParts2[2], 1, i) .. sOut
+	end
+	-- now deal with the whole number part
+	local sN = tParts2[1]
+	repeat
+		-- if there are only 3 or less digits left, we can return
+		if 3 >= string.len(sN) then
+			return sN .. sOut
+		end
+		-- otherwise, inject the separator and 3 digits
+		sOut = sSep .. string.sub(sN, -3) .. sOut
+		-- remove three from remainder string
+		sN = string.sub(sN, 1, -4)
+	until false
 
 end -- pretty_num
---]]
+
 
 -- split string s by separator sep and return a table with the parts
 -- set third parameter to true to include empty parts
