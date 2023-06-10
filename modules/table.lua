@@ -67,7 +67,7 @@ mooncontroller.luacontroller_libraries['table_env'] = function(env)
 	env.table.list_contains = tT.list_contains
 	env.table.keys = mooncontroller_libs.table_keys
 
-	return true
+	return tT
 
 end
 
