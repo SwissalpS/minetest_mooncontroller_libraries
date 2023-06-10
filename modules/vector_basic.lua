@@ -121,4 +121,16 @@ tV.tostring = function(v, s)
 end -- tostring
 
 mooncontroller.luacontroller_libraries['vector_basic'] = tV
+mooncontroller.luacontroller_libraries['vector_basic_env'] = function(env)
+
+	if env.vector then
+		error('Field "vector" already exists in env!\nYou should not load ' ..
+			'both "vector_basic_env" and "vector_env" at the same time.')
+	end
+
+	env.vector = tV
+
+	return tV
+
+end
 
