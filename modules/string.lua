@@ -111,8 +111,12 @@ tS.pretty_num = function(n, i, s)
 end -- pretty_num
 
 
+tS.replace = mooncontroller_libs.string_replace
+
+
 -- split string s by separator sep and return a table with the parts
 -- set third parameter to true to include empty parts
+-- TODO: consider adding a 'max_parts' argument to help against time-outs
 tS.split = function(s, sep, b)
 
 	if 'string' ~= type(s)
@@ -153,6 +157,7 @@ mooncontroller.luacontroller_libraries['string_env'] = function(env)
 	env.string.ellipsis = tS.ellipsis
 	env.string.ends_with = tS.ends_with
 	env.string.pretty_num = tS.pretty_num
+	env.string.replace = tS.replace
 	env.string.split = tS.split
 
 	-- probably not a good idea
