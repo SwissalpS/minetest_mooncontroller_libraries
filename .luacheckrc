@@ -13,6 +13,7 @@ read_globals = {
 	"minetest",
 	"vector",
 	"dump",
+	"dump2"
 
 	-- deps
 	"default",

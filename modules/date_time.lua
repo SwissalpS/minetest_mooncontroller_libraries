@@ -8,7 +8,7 @@ tDT.date_string = function(iTS, sFormat)
 
 	-- TODO
 
-	return ''
+	return '', iTS, sFormat
 
 end -- date_string
 
@@ -20,7 +20,7 @@ tDT.time_string = function(iTS, sFormat)
 
 	-- TODO
 
-	return ''
+	return '', iTS, sFormat
 
 end -- time_string
 
