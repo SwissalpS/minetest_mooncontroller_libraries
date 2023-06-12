@@ -16,7 +16,7 @@ doif('log')
 doif('string')
 doif('table')
 doif('technic_materials')
-doif('vector')
+doif('vector_core')
 doif('vector_basic')
 doif('worldedit')
 
